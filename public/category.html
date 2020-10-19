@@ -181,20 +181,20 @@ _________________________________________________________ -->
                 $.ajaxSetup({
                     contentType: "application/json; charset=utf-8"
                 });
-		var baseSize = 3;
-                var size = $.query.get('size') ? $.query.get('size') : 6;
-                var page = $.query.get('page') ? $.query.get('page') : 1;
-                var tags = $.query.get('tags') ? $.query.get('tags') : "";
+		let baseSize = 3;
+                let size = $.query.get('size') ? $.query.get('size') : 6;
+                let page = $.query.get('page') ? $.query.get('page') : 1;
+                let tags = $.query.get('tags') ? $.query.get('tags') : "";
 
                 $.getJSON('/catalogue/size', {tags: tags}, function (data) {
 		    if (data.size <= size) {
 			size = data.size;
 			}
                     $('#totalProducts').append('Showing <strong>' + size + '</strong> of <strong>' + data.size + '</strong> products');
-                    var totalNumPages = Math.ceil(data.size / size);
+                    let totalNumPages = Math.ceil(data.size / size);
                     console.log("Total pages: " + totalNumPages);
-                    var pagination = "";
-                    for (var i = 1; i <= totalNumPages; i++) {
+                    let pagination = "";
+                    for (let i = 1; i <= totalNumPages; i++) {
                         if (page == i) {
                             pagination = pagination + '<li class="active"><a href="#" onclick=setNewPage(' + i + ')>' + i + '</a></li>';
                         } else {
@@ -203,12 +203,12 @@ _________________________________________________________ -->
                     }
                     console.log("Pagination: " + pagination);
                     $('#pagination').append(pagination);
-		    var pageSize = [];
-                    for (var i = baseSize; i < data.size; i=i+3) {
+		    let pageSize = [];
+                    for (let i = baseSize; i < data.size; i=i+3) {
                         pageSize.push(i);
                     }	
                     pageSize.push(data.size);
-                    var pageSizeHtml = "<strong>Show</strong>"
+                    let pageSizeHtml = "<strong>Show</strong>"
                     pageSize.forEach(function (p) {
                         if (size == p) {
                             pageSizeHtml = pageSizeHtml + '<a href="#" onclick=setNewPageSize(' + p + ') class="btn btn-primary btn-sm">' + p + '</a>';
